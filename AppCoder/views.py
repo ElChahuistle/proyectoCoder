@@ -27,3 +27,4 @@ def estudiantes(request):
 
 def entregables(request):
     return render(request, 'AppCoder/entregables.html')
+
