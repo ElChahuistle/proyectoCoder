@@ -3,9 +3,14 @@ from django.urls import path
 from AppCoder.views import *
 
 urlpatterns = [
-    path('', inicio),
-    path('cursos', cursos),
-    path('profesores', profesores),
-    path('estudiantes', estudiantes),
-    path('entregables', entregables),
+    path('', inicio, name='inicio'),
+    path('cursos/', cursos, name='cursos'),
+    path('profesores/', profesores, name='profesores'),
+    path('estudiantes/', estudiantes, name='estudiantes'),
+    path('entregables/', entregables, name='entregables'),
+    path('curso-formulario/', curso_formulario, name='curso-formulario'),
+    path('profesor-formulario/', profesor_formulario, name='profesor-formulario'),
+    path('busqueda-camada/', busqueda_camada, name='busqueda-camada'),
+    path('buscar/', buscar, name='buscar'),
+    path('formulario/', formulario, name='formulario')
 ]
