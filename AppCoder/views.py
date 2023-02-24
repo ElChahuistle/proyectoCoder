@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/class-based-views/
 from django.views import generic
 from django.views.generic.base import TemplateView
 
-from .models import Professor, Course, Student
+from .models import Course, Professor, Student
 
 
 class IndexView(TemplateView):
@@ -51,6 +51,7 @@ class ProfessorCreateView(generic.CreateView):
     extra_context = {'model': 'Professor'}
     template_name = 'AppCoder/add_new_object.html'
     success_url = '/'  # This is root, then index view will be displayed.
+
 
 # From here on, all the view are going to follow same structure than the previous ones.
 

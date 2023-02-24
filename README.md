@@ -15,10 +15,10 @@ The project follows the standard skeleton suggested by Django.
 | Directory                            | Description                                                                                    |
 |--------------------------------------|------------------------------------------------------------------------------------------------|
 | [AppCoder/](AppCoder)                | Contains the code related to the application AppCoder                                          |
-| [/](ProyectoCoder)      | Contains the general settings of the project.                                                  |
+| [ProyectoCoder/](ProyectoCoder)      | Contains the general settings of the project.                                                  |
 | [static/](static)                    | Contains the static content for Django templates.                                              |
 | [templates/](templates)              | Contains the templates to be used by Django views.                                             |
-| [db.sqlite3](db.sqlite3)             | SQLite database storing general configurations of the project and </br> Django models and data | 
+| [db.sqlite3](db.sqlite3)             | SQLite database storing general configurations of the project and </br> Django models and data |
 | [manage.py](manage.py)               | Main utility to handle setups and settings of this Django project.                             |
 | [requirements.txt](requirements.txt) | Requirements file with the installed libraries for this project.                               |
 

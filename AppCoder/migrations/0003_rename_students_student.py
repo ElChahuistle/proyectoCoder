@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('AppCoder', '0002_professor_students_rename_curso_course_and_more'),
     ]

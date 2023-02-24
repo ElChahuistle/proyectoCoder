@@ -1,8 +1,6 @@
-
 from django.urls import path
 
 from AppCoder import views
-
 
 # Adding variable "app_name" there is no need to write the whole URL in a:href tags.
 # The notation app:name will suffice. In the case of AppCoder, for example a link to
