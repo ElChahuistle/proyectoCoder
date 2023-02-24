@@ -1,0 +1,21 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block titulo %}
+Add New {{ model }}
+{% endblock %}
+
+{% block contenido %}
+    <section class="features-icons bg-light">
+        <div class="container">
+            <h1>New {{ model }}</h1>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form method="post">{% csrf_token %}
+                        {{ form.as_p }}
+                        <input type="submit" value="Save">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

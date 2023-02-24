@@ -1,91 +1,99 @@
-from django.shortcuts import redirect, render
-from django.http import HttpResponse
+"""
+Please visit https://docs.djangoproject.com/en/4.1/intro/tutorial04/
 
-from AppCoder.forms import CursoFormulario, ProfesorFormulario
+In that part of the tutorial, Django documentation explains the use of generic view.
+By implementing this kind of views, there is no need to elaborate in creating views, nor in the definitions
+needed to display data in templates.
 
-from AppCoder.models import Curso, Profesor
+The details on which generic vies are avail able and how to implement them are here:
+https://docs.djangoproject.com/en/4.1/ref/class-based-views/
+"""
+from django.views import generic
+from django.views.generic.base import TemplateView
 
-
-# Create your views here.
-# def curso(request):
-#     curso = Curso(nombre='Backend', camada='12345')
-#     curso.save()
-#     respuesta = f'Curso: {curso.nombre}, Camada: {curso.camada}'
-#
-#     return HttpResponse(respuesta)
-
-
-def inicio(request):
-    return render(request, 'AppCoder/inicio.html')
+from .models import Professor, Course, Student
 
 
-def cursos(request):
-    return render(request, 'AppCoder/cursos.html')
+class IndexView(TemplateView):
+    template_name = 'AppCoder/index.html'
 
 
-def profesores(request):
-    return render(request, 'AppCoder/profesores.html')
+class ProfessorsListView(generic.ListView):
+    template_name = 'AppCoder/content_list.html'
+    extra_context = {'model': 'Professors'}
+
+    # This is an override of the method get:_queryset to indicate this view which
+    # objects should be displayed, in this particular case, every professor.
+    def get_queryset(self):
+        return Professor.objects.all()
 
 
-def estudiantes(request):
-    return render(request, 'AppCoder/estudiantes.html')
+# The generic view DetailView expects that the URL will pass ID of a model, in this
+# case, the ID of a professor, but instead of using the field ID, pk (pk = Primary Key) should be used.
+class ProfessorView(generic.DetailView):
+    model = Professor
+    template_name = 'AppCoder/details.html'
+    extra_context = {'model': 'Professor'}
 
 
-def entregables(request):
-    return render(request, 'AppCoder/entregables.html')
+# There are twi things to notice here:
+# 1. This view implements the mode Professor, by doing this the generated view will be linked directly to the model,
+#   so when the data is submit it will be saved directly to the database.
+# 2. The fields to be displayed can be selected in fields variable, in this all of them are been shown, otherwise
+#   create list of the ones needed.
+class ProfessorCreateView(generic.CreateView):
+    model = Professor
+    fields = "__all__"
+    extra_context = {'model': 'Professor'}
+    template_name = 'AppCoder/add_new_object.html'
+    success_url = '/'  # This is root, then index view will be displayed.
+
+# From here on, all the view are going to follow same structure than the previous ones.
 
 
-def curso_formulario(request):
-    # if request.method == 'POST':
-    #     curso = Curso(nombre=request.POST['curso'], camada=request.POST['camada'])
-    #     curso.save()
-    #     return redirect('inicio')
+class CoursesListView(generic.ListView):
+    template_name = 'AppCoder/content_list.html'
+    extra_context = {'model': 'Courses'}
 
-    if request.method == 'POST':
-        mi_formulario = CursoFormulario(request.POST)
-
-        if mi_formulario.is_valid():
-            informacion = mi_formulario.cleaned_data
-            curso = Curso(nombre=informacion['nombre'], camada=informacion['camada'])
-            curso.save()
-            return redirect('inicio')
-
-    mi_formulario = CursoFormulario()
-
-    return render(request, 'AppCoder/curso-formulario.html', {'formulario_curso:': mi_formulario})
+    # This is an override of the method get:_queryset to indicate this view which
+    # objects should be displayed, in this particular case, every professor.
+    def get_queryset(self):
+        return Course.objects.all()
 
 
-def profesor_formulario(request):
-    if request.method == 'POST':
-        mi_formulario = ProfesorFormulario(request.POST)
-
-        if mi_formulario.is_valid():
-            informacion = mi_formulario.cleaned_data
-            profesor = Profesor(nombre=informacion['nombre'],
-                                apellido=informacion['apellido'],
-                                email=informacion['email'],
-                                profesion=informacion['profesion'])
-            profesor.save()
-            return redirect('inicio')
-    else:
-        mi_formulario = ProfesorFormulario()
-        return render(request, 'AppCoder/profesor-formulario.html', {'formulario_profesor:': mi_formulario})
+class CourseView(generic.DetailView):
+    model = Professor
+    template_name = 'AppCoder/details.html'
+    extra_context = {'model': 'Course'}
 
 
-def busqueda_camada(request):
-    return render(request, 'AppCoder/busqueda-camada.html')
+class CourseCreateView(generic.CreateView):
+    model = Course
+    fields = "__all__"
+    template_name = 'AppCoder/add_new_object.html'
+    extra_context = {'model': 'Course'}
+    success_url = '/'  # This is root, then index view will be displayed.
 
 
-def buscar(request):
-    if request.GET['camada']:
-        mi_camada = request.GET['camada']
-        resultado = Curso.objects.filter(camada__icontains=mi_camada)
+class StudentsListView(generic.ListView):
+    template_name = 'AppCoder/content_list.html'
+    extra_context = {'model': 'Students'}
 
-        return render(request, 'AppCoder/resultados-busqueda.html', {'cursos': resultado, 'camada': mi_camada})
+    # This is an override of the method get:_queryset to indicate this view which
+    # objects should be displayed, in this particular case, every professor.
+    def get_queryset(self):
+        return Student.objects.all()
 
-    respuesta = 'No se encontro esa camada'
-    return HttpResponse(respuesta)
+
+class StudentView(generic.DetailView):
+    model = Student
+    template_name = 'AppCoder/details.html'
+    extra_context = {'model': 'Student'}
 
 
-def formulario(request):
-    return render(request, 'AppCoder/formulario.html')
+class StudentCreateView(generic.CreateView):
+    model = Student
+    fields = "__all__"
+    template_name = 'AppCoder/add_new_object.html'
+    extra_context = {'model': 'Student'}
+    success_url = '/'  # This is root, then index view will be displayed.
