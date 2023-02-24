@@ -1,6 +1,6 @@
 # My School
 
-**Project name:** proyectoCoder
+**Project name:** 
 
 **Application name:** AppCoder
 
@@ -15,7 +15,7 @@ The project follows the standard skeleton suggested by Django.
 | Directory                            | Description                                                                                    |
 |--------------------------------------|------------------------------------------------------------------------------------------------|
 | [AppCoder/](AppCoder)                | Contains the code related to the application AppCoder                                          |
-| [proyectoCoder/](proyectoCoder)      | Contains the general settings of the project.                                                  |
+| [/](ProyectoCoder)      | Contains the general settings of the project.                                                  |
 | [static/](static)                    | Contains the static content for Django templates.                                              |
 | [templates/](templates)              | Contains the templates to be used by Django views.                                             |
 | [db.sqlite3](db.sqlite3)             | SQLite database storing general configurations of the project and </br> Django models and data | 
@@ -27,7 +27,7 @@ The project follows the standard skeleton suggested by Django.
 ## Virtual environment creation
 
 There are 2 ways to create your virtual environment.
-1. From PyCharm, go to File > Settings... > Project: proyectoCoder > Project Interpreter > Add Interpreter...
+1. From PyCharm, go to File > Settings... > Project:  > Project Interpreter > Add Interpreter...
 2. In console, execute the following command:
 
 ```console

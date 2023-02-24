@@ -17,6 +17,10 @@ from .models import Professor, Course, Student
 class IndexView(TemplateView):
     template_name = 'AppCoder/index.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
 
 class ProfessorsListView(generic.ListView):
     template_name = 'AppCoder/content_list.html'
