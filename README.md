@@ -19,7 +19,7 @@ The project follows the standard skeleton suggested by Django.
 | [static/](static)                    | Contains the static content for Django templates.                                              |
 | [templates/](templates)              | Contains the templates to be used by Django views.                                             |
 | [db.sqlite3](db.sqlite3)             | SQLite database storing general configurations of the project and </br> Django models and data | 
-| [manage.py](mamange.py)              | Main utility to handle setups and settings of this Django project.                             |
+| [manage.py](manage.py)               | Main utility to handle setups and settings of this Django project.                             |
 | [requirements.txt](requirements.txt) | Requirements file with the installed libraries for this project.                               |
 
 # Installation
