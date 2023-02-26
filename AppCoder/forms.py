@@ -1,5 +1,6 @@
-from django.forms import Form
+from django import forms
 
 
-class StudentSearch(Form):
-    pass
+# The search form with a single field.
+class StudentSearch(forms.Form):
+    search = forms.CharField(label='Student', strip=True)

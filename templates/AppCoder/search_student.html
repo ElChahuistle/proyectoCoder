@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Busqueda</title>
+    <title>Search</title>
 </head>
 <body>
-    <form action="{% url 'buscar' %}" method="GET">
-    {% csrf_token %}
-        <input type="number" name="camada" id="camada">
-        <input type="submit" value="Buscar">
+    <form action="{% url 'AppCoder:search_results_student' %}" method="get">
+        {{ form.as_p }}
+        <input type="submit" value="Search">
     </form>
 </body>
 </html>

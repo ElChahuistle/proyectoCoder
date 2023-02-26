@@ -25,7 +25,7 @@
                             <li><a href="{% url 'AppCoder:course' object.pk %}">{{ object.name }}</a></li>
                         {% endif %}
                     {% empty %}
-                        <li>There are no professors.</li>
+                        <p>There are no professors.</p>
                     {% endfor %}
                     </ul>
             </div>

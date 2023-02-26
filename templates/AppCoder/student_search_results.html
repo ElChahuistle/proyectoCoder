@@ -1,0 +1,20 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block titulo %}
+Search Results
+{% endblock %}
+
+{% block contenido %}
+<section class="features-icons bg-light">
+    <div class="container">
+        <p>Student(s):</p>
+        <ul>
+            {% for student in object_list %}
+                <li>{{ student }}</li>
+            {% empty %}
+                No students found.
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+{% endblock %}

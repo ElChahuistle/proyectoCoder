@@ -14,7 +14,7 @@
             <p>Specialty: {{ object.specialty }}</p>
             <p>Course(s):</p>
             <ul>
-            {% for course in object.get_courses %}
+            {% for course in object.course_set.all %}
                 <li><a href="{% url 'AppCoder:course' course.pk %}">{{ course }}</a></li>
             {% endfor %}
             </ul>
@@ -23,7 +23,7 @@
             <p>Email: {{ object.email }}</p>
             <p>Course(s)</p>
             <ul>
-            {% for course in object.get_courses %}
+            {% for course in object.course_set.all %}
                 <li><a href="{% url 'AppCoder:course' course.pk %}">{{ course }}</a></li>
             {% endfor %}
             </ul>
@@ -33,7 +33,7 @@
             <p>Professor: <a href="{% url 'AppCoder:professor' object.professor.pk %}">{{ object.professor }}</a></p>
             <p>Student(s): </p>
             <ul>
-            {% for student in object.get_students %}
+            {% for student in object.students.all %}
                 <li><a href="{% url 'AppCoder:student' student.pk %}">{{ student }}</a></li>
             {% endfor %}
             </ul>
