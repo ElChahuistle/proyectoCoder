@@ -1,0 +1,43 @@
+{% extends 'AppCoder/base.html' %}
+
+{% block titulo %}
+{{ heading }} Details
+{% endblock %}
+
+{% block contenido %}
+<section class="features-icons bg-light">
+    <div class="container">
+    <h1>{{ heading }}</h1>
+        {% if heading == 'Professor' %}
+            <p>Full name: {{ object.first_name }} {{ object.last_name }}</p>
+            <p>Email: {{ object.email }}</p>
+            <p>Specialty: {{ object.specialty }}</p>
+            <p>Course(s):</p>
+            <ul>
+            {% for course in object.get_courses %}
+                <li>{{ course }}</li>
+            {% endfor %}
+            </ul>
+        {% elif heading == 'Student' %}
+            <p>Student: {{ object.first_name }} {{ object.last_name }}</p>
+            <p>Email: {{ object.email }}</p>
+            <p>Course(s)</p>
+            <ul>
+            {% for course in object.get_courses %}
+                <li>{{ course }}</li>
+            {% endfor %}
+            </ul>
+        {% elif heading == 'Course' %}
+            <p>Course: {{ object.name }}</p>
+            <p>Attendees count: {{ object.attendees }}</p>
+            <p>Professor: {{ object.professor }}</p>
+            <p>Student(s): </p>
+            <ul>
+            {% for student in object.get_students %}
+                <li>{{ student }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

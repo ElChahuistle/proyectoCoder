@@ -22,83 +22,35 @@ class IndexView(TemplateView):
         return context
 
 
-class ProfessorsListView(generic.ListView):
-    template_name = 'AppCoder/content_list.html'
-    extra_context = {'model': 'Professors'}
+class EntriesList(generic.ListView):
+    template_name = 'AppCoder/entries_list.html'
 
-    # This is an override of the method get:_queryset to indicate this view which
-    # objects should be displayed, in this particular case, every professor.
-    def get_queryset(self):
-        return Professor.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['heading'] = self.model.__name__ + "s"
+
+        return context
 
 
 # The generic view DetailView expects that the URL will pass ID of a model, in this
 # case, the ID of a professor, but instead of using the field ID, pk (pk = Primary Key) should be used.
-class ProfessorView(generic.DetailView):
-    model = Professor
-    template_name = 'AppCoder/details.html'
-    extra_context = {'model': 'Professor'}
+class EntryDetails(generic.DetailView):
+    template_name = 'AppCoder/entry_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['heading'] = self.model.__name__
+
+        return context
 
 
-# There are twi things to notice here:
-# 1. This view implements the mode Professor, by doing this the generated view will be linked directly to the model,
-#   so when the data is submit it will be saved directly to the database.
-# 2. The fields to be displayed can be selected in fields variable, in this all of them are been shown, otherwise
-#   create list of the ones needed.
-class ProfessorCreateView(generic.CreateView):
-    model = Professor
-    fields = "__all__"
-    extra_context = {'model': 'Professor'}
-    template_name = 'AppCoder/add_new_object.html'
+class AddEntry(generic.CreateView):
+    template_name = 'AppCoder/add_entry.html'
+    fields = '__all__'
     success_url = '/'  # This is root, then index view will be displayed.
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['heading'] = self.model.__name__
 
-# From here on, all the view are going to follow same structure than the previous ones.
-
-
-class CoursesListView(generic.ListView):
-    template_name = 'AppCoder/content_list.html'
-    extra_context = {'model': 'Courses'}
-
-    # This is an override of the method get:_queryset to indicate this view which
-    # objects should be displayed, in this particular case, every professor.
-    def get_queryset(self):
-        return Course.objects.all()
-
-
-class CourseView(generic.DetailView):
-    model = Professor
-    template_name = 'AppCoder/details.html'
-    extra_context = {'model': 'Course'}
-
-
-class CourseCreateView(generic.CreateView):
-    model = Course
-    fields = "__all__"
-    template_name = 'AppCoder/add_new_object.html'
-    extra_context = {'model': 'Course'}
-    success_url = '/'  # This is root, then index view will be displayed.
-
-
-class StudentsListView(generic.ListView):
-    template_name = 'AppCoder/content_list.html'
-    extra_context = {'model': 'Students'}
-
-    # This is an override of the method get:_queryset to indicate this view which
-    # objects should be displayed, in this particular case, every professor.
-    def get_queryset(self):
-        return Student.objects.all()
-
-
-class StudentView(generic.DetailView):
-    model = Student
-    template_name = 'AppCoder/details.html'
-    extra_context = {'model': 'Student'}
-
-
-class StudentCreateView(generic.CreateView):
-    model = Student
-    fields = "__all__"
-    template_name = 'AppCoder/add_new_object.html'
-    extra_context = {'model': 'Student'}
-    success_url = '/'  # This is root, then index view will be displayed.
+        return context
