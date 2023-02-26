@@ -1,1 +1,5 @@
-from django.forms import BaseFormSet
+from django.forms import Form
+
+
+class StudentSearch(Form):
+    pass

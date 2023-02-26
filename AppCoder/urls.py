@@ -1,6 +1,6 @@
 from django.urls import path
 
-from AppCoder import views
+from AppCoder.views import IndexView, EntriesList, EntryDetails, AddEntry
 from AppCoder.models import Course, Student, Professor
 
 # Adding variable "app_name" there is no need to write the whole URL in a:href tags.
@@ -11,14 +11,14 @@ from AppCoder.models import Course, Student, Professor
 # notation AppCoder:[ViewName].
 app_name = 'AppCoder'
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
-    path('professors/', views.EntriesList.as_view(model=Professor), name='professors'),
-    path('professor/<int:pk>/', views.EntryDetails.as_view(model=Professor), name='professor'),
-    path('professor/add/', views.AddEntry.as_view(model=Professor), name='add_professor'),
-    path('courses/', views.EntriesList.as_view(model=Course), name='courses'),
-    path('course/<int:pk>/', views.EntryDetails.as_view(model=Course), name='course'),
-    path('course/add/', views.AddEntry.as_view(model=Course), name='add_course'),
-    path('students/', views.EntriesList.as_view(model=Student), name='students'),
-    path('student/<int:pk>/', views.EntryDetails.as_view(model=Student), name='student'),
-    path('student/add/', views.AddEntry.as_view(model=Student), name='add_student'),
+    path('', IndexView.as_view(), name='index'),
+    path('professors/', EntriesList.as_view(model=Professor), name='professors'),
+    path('professor/<int:pk>/', EntryDetails.as_view(model=Professor), name='professor'),
+    path('professor/add/', AddEntry.as_view(model=Professor), name='add_professor'),
+    path('courses/', EntriesList.as_view(model=Course), name='courses'),
+    path('course/<int:pk>/', EntryDetails.as_view(model=Course), name='course'),
+    path('course/add/', AddEntry.as_view(model=Course), name='add_course'),
+    path('students/', EntriesList.as_view(model=Student), name='students'),
+    path('student/<int:pk>/', EntryDetails.as_view(model=Student), name='student'),
+    path('student/add/', AddEntry.as_view(model=Student), name='add_student'),
 ]

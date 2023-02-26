@@ -15,7 +15,7 @@
             <p>Course(s):</p>
             <ul>
             {% for course in object.get_courses %}
-                <li>{{ course }}</li>
+                <li><a href="{% url 'AppCoder:course' course.pk %}">{{ course }}</a></li>
             {% endfor %}
             </ul>
         {% elif heading == 'Student' %}
@@ -24,17 +24,17 @@
             <p>Course(s)</p>
             <ul>
             {% for course in object.get_courses %}
-                <li>{{ course }}</li>
+                <li><a href="{% url 'AppCoder:course' course.pk %}">{{ course }}</a></li>
             {% endfor %}
             </ul>
         {% elif heading == 'Course' %}
             <p>Course: {{ object.name }}</p>
             <p>Attendees count: {{ object.attendees }}</p>
-            <p>Professor: {{ object.professor }}</p>
+            <p>Professor: <a href="{% url 'AppCoder:professor' object.professor.pk %}">{{ object.professor }}</a></p>
             <p>Student(s): </p>
             <ul>
             {% for student in object.get_students %}
-                <li>{{ student }}</li>
+                <li><a href="{% url 'AppCoder:student' student.pk %}">{{ student }}</a></li>
             {% endfor %}
             </ul>
         {% endif %}
